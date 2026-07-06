@@ -2,6 +2,7 @@ module axilite_s(
  
     input  wire         s_axi_aclk,
     input  wire         s_axi_aresetn,
+  
     input  wire         s_axi_awvalid,
     output reg          s_axi_awready,
     input  wire [31: 0] s_axi_awaddr,
@@ -34,6 +35,8 @@ localparam idle            = 0,
            gen_data        = 7,
            send_rd_err     = 8,
            send_rdata      = 9;
+localparam OKAY   = 2'b00;
+localparam SLVERR = 2'b10;
            
            
 reg [3:0] state      = idle;
@@ -105,7 +108,8 @@ begin
                     end
             
         end
-            
+          
+       ////////////////Write operation            
        send_waddr_ack : 
        begin
         s_axi_awready <= 1'b0;
@@ -120,19 +124,19 @@ begin
                   state        <= send_waddr_ack;
                   end
        end
-       
+          
+      
        send_wdata_ack: 
        begin
           s_axi_wready <= 1'b0;
           if(waddr < 128)
                    begin
                    state      <= update_mem;
-                   mem[waddr] <= wdata;
                    end 
           else
                  begin
                  state        <= send_wr_err;
-                 s_axi_bresp <= 2'b11; //error response
+                 s_axi_bresp <= SLVERR;
                  s_axi_bvalid <= 1'b1; 
                  end
        end
@@ -145,7 +149,7 @@ begin
        
        send_wr_resp: 
        begin
-       s_axi_bresp  <= 2'b00;
+       s_axi_bresp <= OKAY;
        s_axi_bvalid <= 1'b1;
        if(s_axi_bready)
                  begin
@@ -180,11 +184,11 @@ begin
                 s_axi_rvalid <= 1'b1;
                 state <= send_rd_err;
                 s_axi_rdata  <= 0;
-                s_axi_rresp  <= 2'b11;
+                s_axi_rresp <= SLVERR;
                 end
        end
     
-    
+//     The counter simply delays the response by 2 clock cycles.
         gen_data: begin
         if(count < 2)
                 begin
@@ -196,7 +200,7 @@ begin
                 begin
                 s_axi_rvalid <= 1'b1;
                 s_axi_rdata  <= rdata;
-                s_axi_rresp  <= 2'b00;
+                s_axi_rresp <= OKAY;
                 if(s_axi_rready)
                    state <= idle;
                 else
@@ -222,9 +226,6 @@ begin
     endcase
 end
 end
- 
- 
- 
 endmodule
 
 
@@ -236,6 +237,9 @@ interface axi_if;
   logic bready, bvalid;
   logic rvalid, rready;
   logic [31:0] awaddr, araddr, wdata, rdata;
-  logic [1:0] wresp,rresp;
+  logic [1:0] bresp, rresp;
   
 endinterface
+
+
+
