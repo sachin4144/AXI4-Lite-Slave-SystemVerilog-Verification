@@ -1,0 +1,29 @@
+======================================================
+              ASSERTION SUMMARY
+======================================================
+
+AWREADY Sequencing      PASS
+
+WREADY Sequencing       PASS
+
+ARREADY Sequencing      PASS
+
+BRESP Validity          PASS
+
+RRESP Validity          PASS
+
+BRESP Stability         PASS
+
+RDATA Stability         PASS
+
+------------------------------------------------------
+
+Total Assertions : 7
+
+Passed           : 7
+
+Failed           : 0
+
+RESULT : ALL ASSERTIONS PASSED
+
+======================================================
