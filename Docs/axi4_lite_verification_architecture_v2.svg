@@ -1,0 +1,130 @@
+<svg viewBox="0 0 1800 1200" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1800" height="1200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="900" y="60" text-anchor="middle" font-size="36" font-weight="700" fill="#1a1a1a">
+    AXI4-Lite SystemVerilog Verification Architecture
+  </text>
+  <line x1="250" y1="90" x2="1550" y2="90" stroke="#999999" stroke-width="2"/>
+
+  <!-- ===================== Arrow marker defs ===================== -->
+  <defs>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="10" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L0,8 L12,4 z" fill="#222222"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="14" markerHeight="14" refX="10" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L0,8 L12,4 z" fill="#555555"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== Left stage brackets ===================== -->
+  <!-- Stage 1: Stimulus Generation (Generator - Driver) -->
+  <line x1="150" y1="140" x2="150" y2="410" stroke="#555555" stroke-width="2.5"/>
+  <line x1="150" y1="140" x2="185" y2="140" stroke="#555555" stroke-width="2.5"/>
+  <line x1="150" y1="410" x2="185" y2="410" stroke="#555555" stroke-width="2.5"/>
+  <text x="120" y="275" text-anchor="middle" font-size="19" font-weight="600" fill="#333333" transform="rotate(-90 120 275)">STIMULUS GENERATION</text>
+
+  <!-- Stage 2: DUT Boundary (AXI - DUT - AXI) -->
+  <line x1="150" y1="440" x2="150" y2="730" stroke="#555555" stroke-width="2.5"/>
+  <line x1="150" y1="440" x2="185" y2="440" stroke="#555555" stroke-width="2.5"/>
+  <line x1="150" y1="730" x2="185" y2="730" stroke="#555555" stroke-width="2.5"/>
+  <text x="120" y="585" text-anchor="middle" font-size="19" font-weight="600" fill="#333333" transform="rotate(-90 120 585)">DUT BOUNDARY</text>
+
+  <!-- Stage 3: Response Checking (Monitor - Scoreboard) -->
+  <line x1="150" y1="760" x2="150" y2="1030" stroke="#555555" stroke-width="2.5"/>
+  <line x1="150" y1="760" x2="185" y2="760" stroke="#555555" stroke-width="2.5"/>
+  <line x1="150" y1="1030" x2="185" y2="1030" stroke="#555555" stroke-width="2.5"/>
+  <text x="120" y="895" text-anchor="middle" font-size="19" font-weight="600" fill="#333333" transform="rotate(-90 120 895)">RESPONSE CHECKING</text>
+
+  <!-- ===================== Main vertical pipeline (x: 340-860) ===================== -->
+
+  <!-- Generator -->
+  <rect x="340" y="140" width="520" height="70" rx="8" fill="#dce6f1" stroke="#33475b" stroke-width="2.5"/>
+  <text x="600" y="185" text-anchor="middle" font-size="24" font-weight="700" fill="#1a1a1a">Generator</text>
+
+  <line x1="600" y1="210" x2="600" y2="234" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- Mailbox (Generator -> Driver) -->
+  <rect x="300" y="240" width="600" height="70" rx="8" fill="#eef1f4" stroke="#33475b" stroke-width="2.5"/>
+  <text x="600" y="272" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Mailbox</text>
+  <text x="600" y="297" text-anchor="middle" font-size="17" fill="#444444">(Generator &#8594; Driver)</text>
+
+  <line x1="600" y1="310" x2="600" y2="334" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- Driver -->
+  <rect x="340" y="340" width="520" height="70" rx="8" fill="#dce6f1" stroke="#33475b" stroke-width="2.5"/>
+  <text x="600" y="385" text-anchor="middle" font-size="24" font-weight="700" fill="#1a1a1a">Driver</text>
+
+  <line x1="600" y1="410" x2="600" y2="434" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- AXI Interface (top) -->
+  <rect x="300" y="440" width="600" height="70" rx="8" fill="#f2f2f2" stroke="#33475b" stroke-width="2.5" stroke-dasharray="10,5"/>
+  <text x="600" y="483" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">AXI4-Lite Interface</text>
+
+  <line x1="600" y1="510" x2="600" y2="534" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- DUT -->
+  <rect x="300" y="540" width="600" height="90" rx="8" fill="#c9d6e3" stroke="#1a1a1a" stroke-width="3"/>
+  <text x="600" y="580" text-anchor="middle" font-size="26" font-weight="700" fill="#1a1a1a">AXI4-Lite Slave</text>
+  <text x="600" y="612" text-anchor="middle" font-size="26" font-weight="700" fill="#1a1a1a">DUT</text>
+
+  <line x1="600" y1="630" x2="600" y2="654" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- AXI Interface (bottom) -->
+  <rect x="300" y="660" width="600" height="70" rx="8" fill="#f2f2f2" stroke="#33475b" stroke-width="2.5" stroke-dasharray="10,5"/>
+  <text x="600" y="703" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">AXI4-Lite Interface</text>
+
+  <line x1="600" y1="730" x2="600" y2="754" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- Monitor -->
+  <rect x="340" y="760" width="520" height="70" rx="8" fill="#dce6f1" stroke="#33475b" stroke-width="2.5"/>
+  <text x="600" y="805" text-anchor="middle" font-size="24" font-weight="700" fill="#1a1a1a">Monitor</text>
+
+  <line x1="600" y1="830" x2="600" y2="854" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- Mailbox (Monitor -> Scoreboard) -->
+  <rect x="300" y="860" width="600" height="70" rx="8" fill="#eef1f4" stroke="#33475b" stroke-width="2.5"/>
+  <text x="600" y="892" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Mailbox</text>
+  <text x="600" y="917" text-anchor="middle" font-size="17" fill="#444444">(Monitor &#8594; Scoreboard)</text>
+
+  <line x1="600" y1="930" x2="600" y2="954" stroke="#222222" stroke-width="3.5" marker-end="url(#arrow)"/>
+
+  <!-- Scoreboard -->
+  <rect x="340" y="960" width="520" height="70" rx="8" fill="#dce6f1" stroke="#33475b" stroke-width="2.5"/>
+  <text x="600" y="1005" text-anchor="middle" font-size="24" font-weight="700" fill="#1a1a1a">Scoreboard</text>
+
+  <!-- ===================== Right side branch: Assertions -> DUT ===================== -->
+  <rect x="1250" y="540" width="500" height="90" rx="8" fill="#f7f2e7" stroke="#8a6d1d" stroke-width="2.5"/>
+  <text x="1500" y="580" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">SystemVerilog</text>
+  <text x="1500" y="612" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Assertions (SVA)</text>
+
+  <line x1="1250" y1="585" x2="910" y2="585" stroke="#555555" stroke-width="3" stroke-dasharray="12,7" marker-end="url(#arrowGray)"/>
+
+  <!-- ===================== Right side branch: Functional Coverage -> Monitor ===================== -->
+  <rect x="1250" y="760" width="500" height="90" rx="8" fill="#f7f2e7" stroke="#8a6d1d" stroke-width="2.5"/>
+  <text x="1500" y="800" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Functional</text>
+  <text x="1500" y="832" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Coverage</text>
+
+  <line x1="1250" y1="805" x2="890" y2="805" stroke="#555555" stroke-width="3" stroke-dasharray="12,7" marker-end="url(#arrowGray)"/>
+
+  <!-- ===================== Legend ===================== -->
+  <rect x="250" y="1080" width="26" height="26" fill="#dce6f1" stroke="#33475b" stroke-width="2"/>
+  <text x="290" y="1099" font-size="17" fill="#333333">Verification Component (Class-Based)</text>
+
+  <rect x="250" y="1120" width="26" height="26" fill="#f2f2f2" stroke="#33475b" stroke-width="2.5" stroke-dasharray="7,4"/>
+  <text x="290" y="1139" font-size="17" fill="#333333">Interface (Signal Connectivity)</text>
+
+  <rect x="820" y="1080" width="26" height="26" fill="#c9d6e3" stroke="#1a1a1a" stroke-width="2.5"/>
+  <text x="860" y="1099" font-size="17" fill="#333333">Design Under Test (DUT)</text>
+
+  <rect x="820" y="1120" width="26" height="26" fill="#f7f2e7" stroke="#8a6d1d" stroke-width="2"/>
+  <text x="860" y="1139" font-size="17" fill="#333333">Assertions / Coverage (Passive Checks)</text>
+
+  <!-- Footer -->
+  <text x="900" y="1180" text-anchor="middle" font-size="15" fill="#888888">
+    AXI4-Lite Slave Verification Environment &#8212; SystemVerilog Class-Based Testbench
+  </text>
+
+</svg>
