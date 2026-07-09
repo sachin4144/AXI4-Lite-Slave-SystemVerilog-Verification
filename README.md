@@ -75,6 +75,17 @@ AXI4-Lite-Slave-SystemVerilog-Verification
 
 ---
 
+
+## RTL Block Diagram
+
+The AXI4-Lite Slave RTL is implemented using an FSM-based architecture. The design contains separate read and write datapaths controlled by a finite state machine (FSM). The controller manages AXI4-Lite handshaking, memory access, and response generation.
+
+<p align="center">
+    <img src="Docs/axi4_lite_rtl_architecture.svg"
+         alt="AXI4-Lite RTL Block Diagram"
+         width="100%">
+</p>
+
 # Verification Architecture
 
 ```
