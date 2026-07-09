@@ -1,0 +1,13 @@
+======================================================
+
+Simulation Time : 9325 ns
+
+Transactions    : 100
+
+PASS            : 100
+
+FAIL            : 0
+
+Overall Result  : VERIFICATION PASSED
+
+======================================================
