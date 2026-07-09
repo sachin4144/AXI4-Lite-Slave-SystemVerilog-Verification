@@ -1,27 +1,50 @@
-# AXI4-Lite Slave Interface and SystemVerilog Verification
+# AXI4-Lite Slave Interface RTL Design and SystemVerilog Verification
 
-## Overview
+![SystemVerilog](https://img.shields.io/badge/SystemVerilog-Verification-blue)
+![Verilog](https://img.shields.io/badge/RTL-Verilog-green)
+![Functional Coverage](https://img.shields.io/badge/Functional_Coverage-95.48%25-success)
+![Assertions](https://img.shields.io/badge/SVA-Passed-success)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-This project implements a simplified **AXI4-Lite Slave Interface** in **Verilog HDL** with a parameterized memory. The design supports single-beat read and write transactions using the AXI4-Lite protocol and is verified using both a directed Verilog testbench and a SystemVerilog class-based constrained-random verification environment.
+---
+
+## Project Overview
+
+This project implements a simplified **AXI4-Lite Slave Interface** in Verilog HDL and verifies its functionality using a **SystemVerilog class-based constrained-random verification environment**.
+
+The design supports single-beat read and write transactions with parameterized memory and includes functional coverage, SystemVerilog Assertions (SVA), constrained-random stimulus generation, protocol checking, and scoreboard-based data verification.
 
 ---
 
 ## Features
 
-- AXI4-Lite compliant single-beat read and write transactions
-- FSM-based RTL implementation for read and write channels
-- Parameterized memory architecture
-- VALID/READY handshake implementation
-- AXI response generation (OKAY/SLVERR)
-- Directed Verilog testbench
-- SystemVerilog class-based verification environment
-- Constrained-random stimulus generation
-- Self-checking scoreboard
-- Virtual Interface and Mailbox based communication
+### RTL Design
+
+- AXI4-Lite Slave Interface
+- Single-beat Read and Write Transactions
+- Parameterized 128-word Memory
+- FSM-based Control Logic
+- OKAY and SLVERR Response Generation
+- Address Boundary Checking
 
 ---
 
-## Project Structure
+### Verification Environment
+
+- Class-Based SystemVerilog Testbench
+- Constrained Random Transaction Generation
+- Driver
+- Monitor
+- Scoreboard
+- Environment Class
+- Mailbox-based Communication
+- Event Synchronization
+- Functional Coverage
+- SystemVerilog Assertions
+
+---
+
+## Repository Structure
 
 ```
 AXI4-Lite-Slave-SystemVerilog-Verification
@@ -29,162 +52,151 @@ AXI4-Lite-Slave-SystemVerilog-Verification
 ├── RTL
 │   └── axilite_s.v
 │
+├── Verification
+│   ├── interface.sv
+│   ├── transaction.sv
+│   ├── generator.sv
+│   ├── driver.sv
+│   ├── monitor.sv
+│   ├── scoreboard.sv
+│   ├── environment.sv
+│   ├── axi_assertions.sv
+│   └── tb.sv
+│
 ├── Verilog_TB
 │   └── tb_axilite.v
 │
-├── SV_TB
-│   └── tb_axilite_sv.sv
+├── Simulation
 │
-├── docs
-│   ├── BlockDiagram.png
-│   ├── AXI_Write_Waveform.png
-│   ├── AXI_Read_Waveform.png
-│   └── Verification_Architecture.png
+├── Docs
 │
 └── README.md
 ```
 
 ---
 
-# RTL Architecture
-
-The RTL consists of:
-
-- AXI Write Address Channel
-- AXI Write Data Channel
-- AXI Write Response Channel
-- AXI Read Address Channel
-- AXI Read Data Channel
-- Parameterized Memory
-- Read and Write FSMs
-
----
-
-# Verification Environment
-
-The SystemVerilog verification environment follows a class-based architecture.
+# Verification Architecture
 
 ```
-                +----------------+
-                |   Generator    |
-                +----------------+
-                        |
-                        |
-                 Mailbox Transfer
-                        |
-                        v
-                +----------------+
-                |     Driver     |
-                +----------------+
-                        |
-                Virtual Interface
-                        |
-                        v
-                +----------------+
-                |      DUT       |
-                +----------------+
-                        |
-                Virtual Interface
-                        |
-                        v
-                +----------------+
-                |    Monitor     |
-                +----------------+
-                        |
-                 Mailbox Transfer
-                        |
-                        v
-                +----------------+
-                |  Scoreboard    |
-                +----------------+
-```
+             Generator
+                 │
+          Mailbox (Gen→Drv)
+                 │
+              Driver
+                 │
+             AXI Interface
+                 │
+              DUT (RTL)
+                 │
+             AXI Interface
+                 │
+              Monitor
+                 │
+          Mailbox (Mon→Sco)
+                 │
+            Scoreboard
 
-The verification environment consists of:
-
-- Transaction
-- Generator
-- Driver
-- Monitor
-- Scoreboard
-- Virtual Interface
-- Mailboxes
-- Constrained-Random Verification
-
----
-
-# FSM Overview
-
-## Write FSM
-
-```
-IDLE
-  |
-  v
-WRITE ADDRESS
-  |
-  v
-WRITE DATA
-  |
-  v
-WRITE RESPONSE
-  |
-  v
-IDLE
-```
-
-## Read FSM
-
-```
-IDLE
-  |
-  v
-READ ADDRESS
-  |
-  v
-READ DATA
-  |
-  v
-READ RESPONSE
-  |
-  v
-IDLE
+          Functional Coverage
+          SystemVerilog Assertions
 ```
 
 ---
 
-# Verification Flow
+# Verification Components
 
-1. Generator randomizes AXI transactions.
-2. Driver converts transactions into AXI bus activity.
-3. DUT performs memory read/write operations.
-4. Monitor captures DUT responses.
-5. Scoreboard compares DUT outputs against a reference memory model.
-6. PASS/FAIL messages are automatically reported.
+| Component | Description |
+|------------|-------------|
+| Generator | Creates constrained-random AXI transactions |
+| Driver | Drives transactions to DUT |
+| Monitor | Samples DUT responses and collects coverage |
+| Scoreboard | Compares expected vs actual results |
+| Environment | Connects all verification components |
+| Assertions | Protocol checking using SVA |
+
+---
+
+# Functional Coverage
+
+Coverage is collected in the monitor using SystemVerilog covergroups.
+
+The following metrics are tracked:
+
+- Read / Write Operations
+- Address Ranges
+- Write Data
+- Read Data
+- BRESP
+- RRESP
+- Cross Coverage
+
+### Final Coverage
+
+| Coverage Type | Result |
+|---------------|--------|
+| Operation | 100% |
+| Address | 100% |
+| Data | 91.67% |
+| Response | 100% |
+| Cross Coverage | 85.71% |
+| **Overall Functional Coverage** | **95.48%** |
+
+---
+
+# SystemVerilog Assertions
+
+The following protocol properties are verified:
+
+- AWREADY sequencing
+- WREADY sequencing
+- ARREADY sequencing
+- BRESP validity
+- RRESP validity
+- BRESP stability
+- RDATA stability
+
+All assertions passed successfully.
 
 ---
 
 # Simulation Results
 
-The verification environment successfully validates:
+```
+Scoreboard Summary
 
-- Write Transactions
-- Read Transactions
-- VALID/READY Handshaking
-- Memory Read/Write Operations
-- AXI Response Generation
+Transactions : 100
+PASS         : 100
+FAIL         : 0
 
-Example scoreboard output:
+RESULT : TEST PASSED
+```
 
 ```
-[GEN] WRITE Address=1 Data=10
-[DRV] WRITE Transaction
-[MON] Write Response = OKAY
-[SCO] DATA STORED
+Coverage Summary
 
-[GEN] READ Address=1
-[DRV] READ Transaction
-[MON] Read Data = 10
-[SCO] DATA MATCHED
+Overall Functional Coverage : 95.48%
+```
+
+```
+Assertion Summary
+
+Total Assertions : 7
+Passed           : 7
+Failed           : 0
+
+RESULT : ALL ASSERTIONS PASSED
+```
+
+```
+FINAL VERIFICATION SUMMARY
+
+Transactions        : 100
+Scoreboard Status   : PASS
+Functional Coverage : 95.48%
+Assertions          : PASS
+
+OVERALL RESULT
+
+VERIFICATION PASSED
 ```
 
 ---
@@ -194,32 +206,20 @@ Example scoreboard output:
 - Verilog HDL
 - SystemVerilog
 - EDA Playground
-
----
-
-# Key Concepts Demonstrated
-
-- RTL Design
-- Finite State Machines (FSM)
-- AXI4-Lite Protocol
-- Memory Interface Design
-- Directed Verification
-- Constrained-Random Verification
-- Mailbox Communication
-- Virtual Interface
-- Self-Checking Scoreboard
-- Transaction-Based Verification
+- Git
+- GitHub
 
 ---
 
 # Future Improvements
 
-- Functional Coverage
-- SystemVerilog Assertions (SVA)
-- UVM-Based Verification Environment
-- Burst Transfer Support
-- Parameterized Memory Depth
-- AXI Master Verification
+- UVM-based Verification Environment
+- Functional Coverage Driven Randomization
+- Reference Model
+- Protocol Checker
+- AXI Burst Transactions
+- AXI4 Full Support
+- Coverage Closure Automation
 
 ---
 
@@ -227,8 +227,9 @@ Example scoreboard output:
 
 **Sachin Kumar Mishra**
 
-B.Tech | Electronics Engineering
-
 MNNIT Allahabad
 
-GitHub: https://github.com/sachin4144
+Interested in RTL Design, Functional Verification and Digital Design.
+
+GitHub:
+https://github.com/sachin4144
