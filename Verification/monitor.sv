@@ -178,7 +178,7 @@ endgroup
     forever
     begin
 
-      tr = new();
+      tr = new();//new is in forever loop
 
       @(posedge vif.clk);
 
