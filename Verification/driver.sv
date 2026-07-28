@@ -68,7 +68,7 @@ class driver;
 
     timeout = 20;
 
-    while(!vif.awready && timeout > 0)
+    while(!vif.awready && timeout > 0)//wait for ready signal for given time cycles
     begin
       timeout--;
       @(posedge vif.clk);
