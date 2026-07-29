@@ -131,7 +131,7 @@ class generator;
 
       mbxgd.put(tr);
 
-      @(sconext);
+      @(sconext); // wait for scoreboard to write to golden memory or complete the comparison then next transaction will be generated
 
     end
 
