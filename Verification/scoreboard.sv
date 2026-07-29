@@ -181,7 +181,7 @@ class scoreboard;
 
           $display("------------------------------------------------");
 
-          ->sconext;
+          ->sconext; // triggering event sconext so that gererator contiues generating transactions
 
       end
 
