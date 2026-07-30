@@ -178,7 +178,7 @@ task report();
 
 $display("");
 $display("======================================================");
-  $display("                ASSERTION SUMMARY           ");
+$display("                ASSERTION SUMMARY           ");
 $display("======================================================");
 
 $display("%-30s %s","AWREADY Sequencing",
@@ -203,8 +203,6 @@ $display("%-30s %s","RDATA Stability",
          (rstable_fail==0) ? "PASS" : "FAIL");
 
 $display("------------------------------------------------------");
-// $display("Total Assertion Failures : %0d",
-//           assertion_fail_count);
     $display("Total Assertions   : %0d", TOTAL_ASSERTIONS);
     $display("Passed             : %0d", assertion_pass_count);
     $display("Failed             : %0d", assertion_fail_count);
