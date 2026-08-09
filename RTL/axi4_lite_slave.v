@@ -33,16 +33,15 @@ localparam idle            = 0,
            send_wr_err     = 5,
            send_wr_resp    = 6,
            gen_data        = 7,
-           send_rd_err     = 8,
-           send_rdata      = 9;
- 
+           send_rd_err     = 8;
+  
 localparam OKAY   = 2'b00;
 localparam SLVERR = 2'b10;
            
            
-reg [3:0] state      = idle;
-reg [3:0] next_state = idle;
-reg [1:0] count    = 0;
+reg [3:0] state = idle;
+
+reg [1:0] count = 0;
 reg [31:0] waddr, raddr, wdata, rdata;
  
 reg [31:0] mem [0:127];
@@ -116,9 +115,10 @@ begin
         s_axi_awready <= 1'b0;
         if(s_axi_wvalid)
                   begin
-                  wdata        <= s_axi_wdata;
-                  s_axi_wready <= 1'b1;
-                  state        <= send_wdata_ack;
+                    state        <= send_wdata_ack;
+                    wdata        <= s_axi_wdata;
+                    s_axi_wready <= 1'b1;
+                  
                   end
         else
                   begin
