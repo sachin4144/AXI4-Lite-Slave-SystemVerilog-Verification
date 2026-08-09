@@ -35,6 +35,7 @@ localparam idle            = 0,
            gen_data        = 7,
            send_rd_err     = 8,
            send_rdata      = 9;
+ 
 localparam OKAY   = 2'b00;
 localparam SLVERR = 2'b10;
            
