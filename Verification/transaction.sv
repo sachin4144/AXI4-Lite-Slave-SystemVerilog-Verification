@@ -1,6 +1,6 @@
 class transaction;
 
-  rand bit        op;//0 for read 1 for write
+  rand bit        op;
   rand bit [31:0] awaddr;
   rand bit [31:0] araddr;
   rand bit [31:0] wdata;
