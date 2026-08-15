@@ -233,7 +233,7 @@ VERIFICATION PASSED
 
 # Author
 
-**Sachin Kumar Mishra**
+**Sachin Kumar Mishra and Paras Jain**
 
 MNNIT Allahabad
 
