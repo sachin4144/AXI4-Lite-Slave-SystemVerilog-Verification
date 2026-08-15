@@ -88,7 +88,7 @@ begin
             wdata         <= 0;
             rdata         <= 0;
             count         <= 0;
-            s_axi_rvalid  <= 1'b0;
+          
             
             if (s_axi_awvalid == 1'b1)
                     begin
